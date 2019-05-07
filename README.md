@@ -6,7 +6,12 @@
 
 **Shorter title**: Modeling network plasticity from single-unit simple neurons
 
-**Consultants**: 	
+**Group members**:
+-Samantha Sun - 1st year PhD student
+-(add your names here!)
+
+**Consultants**:  
+
   Jonathan Mischler (jmishler@uw.edu) – 2nd year graduate student in Fetz lab  
   Larry Shupe (lshupe@uw.edt) – Senior Researcher in Fetz lab  
 
@@ -31,7 +36,7 @@ The *third aim* of this project (if there is time) would be to see how the netwo
 
 2. 	Bullmore E, Sporns O. Complex brain networks: Graph theoretical analysis of structural and functional systems. Nat Rev Neurosci. 2009;10(3):186-198. doi:10.1038/nrn2575
 
-Recommended reads:  
+**Recommended reads**:  
 (1)	https://www.izhikevich.org/publications/dsn.pdf  
 
 Book that has a really good description of the different neuron models and basic introduction to neurons if you need a refresher. Recommend reading pages 8-15, 20, 267-277 for model information and chapter 1 if you need a neuron refresher.   
