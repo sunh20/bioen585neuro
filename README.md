@@ -1,5 +1,4 @@
 # bioen585neuro
-BIOEN585 final project: neuro group
 
 ### BIOEN 485/585 Final	Project: Neuro group
 ###### Spring 2019
@@ -8,8 +7,8 @@ BIOEN585 final project: neuro group
 **Shorter title**: Modeling network plasticity from single-unit simple neurons
 
 **Consultants**: 	
-  Jonathan Mischler (jmishler@uw.edu) – 2nd year graduate student in Fetz lab
-  Larry Shupe (lshupe@uw.edt) – Senior Researcher in Fetz lab
+  Jonathan Mischler (jmishler@uw.edu) – 2nd year graduate student in Fetz lab  
+  Larry Shupe (lshupe@uw.edt) – Senior Researcher in Fetz lab  
 
 **Importance**: With advances in neural recording technologies, it is now possible to simultaneously perform single-site recordings and local field potential (LFP) recordings. However, there are still questions regarding the relationship between individual neuron spiking and the overall LFP shape and whether we can learn about the behavior of the network of neurons from the LFP it generates. 
 
@@ -32,16 +31,16 @@ The *third aim* of this project (if there is time) would be to see how the netwo
 
 2. 	Bullmore E, Sporns O. Complex brain networks: Graph theoretical analysis of structural and functional systems. Nat Rev Neurosci. 2009;10(3):186-198. doi:10.1038/nrn2575
 
-Recommended reads:
-(1)	https://www.izhikevich.org/publications/dsn.pdf
+Recommended reads:  
+(1)	https://www.izhikevich.org/publications/dsn.pdf  
 
-Book that has a really good description of the different neuron models and basic introduction to neurons if you need a refresher. Recommend reading pages 8-15, 20, 267-277 for model information and chapter 1 if you need a neuron refresher. 
+Book that has a really good description of the different neuron models and basic introduction to neurons if you need a refresher. Recommend reading pages 8-15, 20, 267-277 for model information and chapter 1 if you need a neuron refresher.   
 
-(2)	https://www.annualreviews.org/doi/full/10.1146/annurev.neuro.31.060407.125639
-https://www.sciencedirect.com/science/article/pii/S0896627312007039?via%3Dihub
+(2)	https://www.annualreviews.org/doi/full/10.1146/annurev.neuro.31.060407.125639  
+https://www.sciencedirect.com/science/article/pii/S0896627312007039?via%3Dihub  
 
-Papers that explains the different plasticity rules (STDP, Hebb rule, plasticity models). Only need to read the introduction for the first paper. For the second paper, take a look at Figure 2 and make sure you understand what that means. We will be referencing the Hebbian STDP model.
+Papers that explains the different plasticity rules (STDP, Hebb rule, plasticity models). Only need to read the introduction for the first paper. For the second paper, take a look at Figure 2 and make sure you understand what that means. We will be referencing the Hebbian STDP model.  
 
-(3)	https://www.researchgate.net/publication/317579637_Spiking_Neuron_Models_A_Review
+(3)	https://www.researchgate.net/publication/317579637_Spiking_Neuron_Models_A_Review  
 
 Paper on different neuron models. Mostly for reference, don’t actually read it unless you’re really interested because it’s super dense and I won’t read it lol.
