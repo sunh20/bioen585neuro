@@ -1,0 +1,49 @@
+Project timeline: May 8th, 2019 - June 10th, 2019 (4.5 wks)
+
+Milestones:
+May 20 		Background draft due
+May 27		Methods draft due
+Jun 3		Results draft due
+Jun 10		Final project due
+
+Wk 0.5: Orientation + project understanding
+	(1) Get familiar with Github
+	(2) Get up to speed with understanding project (papers)
+	(3) Set meeting times + expectations
+	(4) Review timeline
+
+Wk 1: 	Complete Aim 1, start on Aim 2, background section
+	(1) Get initial ODE working
+	(2) Create stimulation inputs
+	(3) Fit params to existing data - parameter estimation
+
+	(4) Finalize network properties of rich club (lit search)
+	(5) Create initial code for connecting neurons together 
+	(6) Create initial code for stimulating a small group of neurons (make it so that % neurons stimulated can be modified)
+
+	(7) Write background section (by Fri 17th)
+
+Wk 2:	Work on Aim 2 + methods section
+	(1) Create rich-club networks + look at summed activity
+
+	(2) Generate several networks + compare activities, measure mean and variance of response amplitude
+	(3) Generate networks of different sizes + compare activities, measure mean + variance of response amplitude
+	(4) Use different % neurons stimulated + compare activities, mean + variance of response amplitude
+
+	(5) Compare results from (1-4) to lit results
+	(6) Write methods section (by Fri)
+
+Wk 3:	Verification/validation analysis + results section
+	(1) bifurcation analysis (equation parameters, network size param, neurons stimulated param)
+	(2) results validation to lit results
+	(3) verification: steady state analysis (SS is zero/no spiking so make sure model does this)
+	(4) other verification + validation
+	(5) write results section
+
+Wk 4:	Revise final project document + prepare presentation + buffer time for previous weeks
+
+
+
+
+
+
