@@ -6,6 +6,10 @@ May 27		Methods draft due
 Jun 3		Results draft due
 Jun 10		Final project due
 
+Other things going on:
+May 17		Mary Gates Symposium
+May 20		BioE Capstone Symposium
+
 Wk 0.5: Orientation + project understanding
 	(1) Get familiar with Github
 	(2) Get up to speed with understanding project (papers)
