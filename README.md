@@ -10,10 +10,13 @@
 - Samantha Sun - 1st year PhD student (sunh20@uw.edu)
 - Kelsey Luu - 3rd year undergraduate student (kelseytl@uw.edu)
 - Grace Jun - 3rd year undergraduate student (gracejun@uw.edu)
+- Meriam Lahrichi - 3rd year undergraduate student (meriaml@uw.edu)
+- <insert name, year, and email>
+
 
 **Consultants**:  
-  Jonathan Mischler (jmishler@uw.edu) – 2nd year graduate student in Fetz lab  
-  Larry Shupe (lshupe@uw.edt) – Senior Researcher in Fetz lab  
+- Jonathan Mischler – 2nd year graduate student in Fetz lab (jmishler@uw.edu)
+- Larry Shupe – Senior Researcher in Fetz lab (lshupe@uw.edt) 
 
 **Importance**: With advances in neural recording technologies, it is now possible to simultaneously perform single-site recordings and local field potential (LFP) recordings. However, there are still questions regarding the relationship between individual neuron spiking and the overall LFP shape and whether we can learn about the behavior of the network of neurons from the LFP it generates. 
 
