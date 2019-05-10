@@ -8,7 +8,7 @@
 
 **Group members**:  
 - Samantha Sun - 1st year PhD student (sunh20@uw.edu)
-- (add your names + emails here!)
+- Kelsey Luu - 3rd year undergraduate student (kelseytl@uw.edu)
 
 **Consultants**:  
   Jonathan Mischler (jmishler@uw.edu) – 2nd year graduate student in Fetz lab  
