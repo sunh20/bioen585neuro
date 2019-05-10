@@ -11,7 +11,7 @@
 - Kelsey Luu - 3rd year undergraduate student (kelseytl@uw.edu)
 - Grace Jun - 3rd year undergraduate student (gracejun@uw.edu)
 - Meriam Lahrichi - 3rd year undergraduate student (meriaml@uw.edu)
-- <insert name, year, and email>
+- Jackson Chin - 4th year undergraduate student (jch1n@uw.edu)
 
 
 **Consultants**:  
