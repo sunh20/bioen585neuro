@@ -10,7 +10,6 @@
 - Samantha Sun - 1st year PhD student (sunh20@uw.edu)
 - Kelsey Luu - 3rd year undergraduate student (kelseytl@uw.edu)
 - Grace Jun - 3rd year undergraduate student (gracejun@uw.edu)
-- Jackson Chin - 4th year undergraduate student (jch1n@uw.edu)
 
 **Consultants**:  
   Jonathan Mischler (jmishler@uw.edu) – 2nd year graduate student in Fetz lab  
