@@ -20,16 +20,24 @@ c = -65;    % mV, post spike reset for v
 d = 8;      % post spike reset for u
 maxSpike = 30; % max spike potential
 
-% variables
+% time
 dt = 0.01;
 t = 0:dt:100; % time span (units?)
-I = zeros(length(t),1);
-I(500:1000) = 40;  % +40 mV square pulse
-I(2500:3000) = 40;  % +40 mV square pulse
-I(4500:5000) = 40;  % +40 mV square pulse
-I(6500:7000) = 40;  % +40 mV square pulse
-I(8500:9000) = 40;  % +40 mV square pulse
 
+% inputs - uncomment the input you want
+I = zeros(length(t),1);
+
+% input 1: +40 mV square pulses 
+    I(500:1000) = 40;  % +40 mV square pulse
+    I(2500:3000) = 40;  % +40 mV square pulse
+    I(4500:5000) = 40;  % +40 mV square pulse
+    I(6500:7000) = 40;  % +40 mV square pulse
+    I(8500:9000) = 40;  % +40 mV square pulse
+    
+% input 2: random noise [0 100]
+    % I = rand(size(I)).*100;
+
+% variables
 u = zeros(length(t),1);
 v = zeros(length(t),1);
 u(1) = d;   % ICs
@@ -39,7 +47,7 @@ v(1) = c;   % ICs
 for idx = 1:length(t)-1
     % if reaches max spike potential
     if v(idx) >= maxSpike
-        disp('Max spike reached')
+        fprintf('Max spike reached at t=%.2f\n',idx*dt)
         v(idx) = maxSpike; % makes sure spikes don't exceed this
         v(idx+1) = c;
         u(idx+1) = u(idx) + d;
