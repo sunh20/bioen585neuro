@@ -22,10 +22,13 @@ maxSpike = 30; % max spike potential
 
 % variables
 dt = 0.01;
-t = 0:dt:100; % time span
-I = (square(t)+1).*20;
-%I = zeros(length(t),1);
-%I(500:1000) = 40;  % +40 mV square wave
+t = 0:dt:100; % time span (units?)
+I = zeros(length(t),1);
+I(500:1000) = 40;  % +40 mV square pulse
+I(2500:3000) = 40;  % +40 mV square pulse
+I(4500:5000) = 40;  % +40 mV square pulse
+I(6500:7000) = 40;  % +40 mV square pulse
+I(8500:9000) = 40;  % +40 mV square pulse
 
 u = zeros(length(t),1);
 v = zeros(length(t),1);
@@ -56,7 +59,7 @@ end
 figure;
 
 ax1 = subplot(2,1,1);
-plot(t,v)
+plot(t,v,t,u)
 title('Voltage time response of Izhikevich simple model')
 
 ax2 = subplot(2,1,2);
