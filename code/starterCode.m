@@ -15,16 +15,17 @@ C = 140;
 
 % parameters
 a = 0.02;   % time scale of recovery u
-b = 2;    % sensitivity of recovery
+b = 0.2;    % sensitivity of recovery
 c = -65;    % mV, post spike reset for v
 d = 8;      % post spike reset for u
-maxSpike = 30; % threshold potential
+maxSpike = 30; % max spike potential
 
 % variables
 dt = 0.01;
 t = 0:dt:100; % time span
-I = zeros(length(t),1);
-I(500:500:end) = 40;  % +40 mV input every 5 seconds
+I = (square(t)+1).*20;
+%I = zeros(length(t),1);
+%I(500:1000) = 40;  % +40 mV square wave
 
 u = zeros(length(t),1);
 v = zeros(length(t),1);
@@ -54,15 +55,15 @@ end
 % plot time repsonse vs. input
 figure;
 
-subplot(2,1,1)
+ax1 = subplot(2,1,1);
 plot(t,v)
 title('Voltage time response of Izhikevich simple model')
 
-subplot(2,1,2)
+ax2 = subplot(2,1,2);
 plot(t,I)
 title('Input function')
 
-
+linkaxes([ax1 ax2],'xy')
 
 
 
