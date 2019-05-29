@@ -49,4 +49,5 @@ labels = {};
 for i = 1:size(network, 2)
     labels{i} = "Neuron " + i;
 end
+
 legend(labels)
