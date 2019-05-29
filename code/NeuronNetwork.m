@@ -10,6 +10,7 @@ for i = 1:size(network, 2)
     network{i}.name = i;
 end
 
+% future adj matrix function (genNetwork) will go here
 adjMatrix = zeros(size(network, 1), size(network, 2));
 
 adjMatrix(1, 2) = 1;
