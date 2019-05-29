@@ -24,9 +24,23 @@ stim(1) = 20;
 outputs = zeros(size(network, 1), size(network, 2));
 spikes = zeros(size(network, 1), size(network, 2));
 
-for i = 1:100
+% time
+dt = 0.01;
+t = 0:dt:100; % time span (units?)
+
+% inputs - uncomment the input you want
+I = zeros(length(t),1);
+
+% input 1: +40 mV square pulses 
+    I(500:1000) = 40;  % +40 mV square pulse
+    I(2500:3000) = 40;  % +40 mV square pulse
+    I(4500:5000) = 40;  % +40 mV square pulse
+    I(6500:7000) = 40;  % +40 mV square pulse
+    I(8500:9000) = 40;  % +40 mV square pulse
+
+for i = 1:length(t) - 1
     for j = 1:size(network, 2)
-        spikes(j) = network{j}.addPotential(stim(j) + outputs(j));
+        spikes(j) = network{j}.addPotential(stim(j) + outputs(j), dt);
     end
     
     outputs = outputs * 0;
@@ -43,11 +57,14 @@ end
 hold on
 
 for i = 1:size(network, 2)
-    plot(0:100, network{i}.inter)
+    plot(t, network{i}.intra)
 end
 
 labels = {};
 for i = 1:size(network, 2)
     labels{i} = "Neuron " + i;
 end
+
 legend(labels)
+
+plot(t, I)
