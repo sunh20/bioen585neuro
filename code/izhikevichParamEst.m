@@ -1,3 +1,7 @@
+% Performs parameter estimation of an averaged single-unit neuron recording
+% based on the Izhikevich neuron model. Used weighted least-squares error
+% model and fminsearch.
+
 close all; clc;
  load ('neuron2.mat')
 global data 

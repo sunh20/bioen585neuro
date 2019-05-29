@@ -1,6 +1,8 @@
 % Created by Eugene M. Izhikevich, February 25, 2003
 % simulates 1000 randomely connected spiking neurons in real time
 % edited by Samantha Sun 20190513
+clear all; close all; clc
+fprintf('This code simulates 1000 randomly connected spiking neurons,\n800 exhitatory and 200 inhibitory, and displays a rastor plot of\nthe spiking activity of all neurons with an random input')
 
 % Excitatory neurons    Inhibitory neurons
 Ne=800;                 Ni=200;
@@ -38,7 +40,7 @@ xlim([0 1000])
 ylim([0 1000])
 
 subplot(2,1,2)
-plot(1:1000, tot_firings)
+bar(tot_firings)
 xlabel('Time (ms)')
 ylabel('Total Neurons fired')
 xlim([0 1000])
