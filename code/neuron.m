@@ -1,50 +1,45 @@
 classdef neuron < handle
     properties
-        potential;
+        inter;
+        extra;
         resting;
         threshold;
+        max;
         output;
-        decay;
         name;
     end
     methods
-        function obj = neuron(potential, threshold, output, decay)
+        function obj = neuron(inter, extra, resting, threshold, output, name)
             if nargin == 0
                 obj.resting = -65;
-                obj.potential = [obj.resting];
+                obj.inter = [obj.resting];
                 obj.threshold = 70;
-                obj.output = 20;
-                obj.decay = 20;
+                obj.output = 70;
+                obj.extra = [obj.resting];
             else
-                obj.potential = potential;
+                obj.inter = inter;
+                obj.extra = extra;
+                obj.resting = resting;
                 obj.threshold = threshold;
                 obj.output = output;
-                obj.decay = decay;
+                obj.name = name;
             end
         end
         
         function spike = addPotential(obj, stimulus)
             spike = 0;
-            if obj.potential(end) >= obj.threshold
-                obj.potential(end + 1) = obj.resting + stimulus;
-            else 
-                obj.potential(end + 1) = obj.potential(end) + stimulus;
-            end
-            if obj.potential(end) >= obj.threshold
+            if obj.inter(end) >= obj.max
+                obj.inter(end + 1) = obj.resting;
                 spike = obj.output;
+            elseif obj.inter(end) >= obj.threshold
+                obj.inter(end + 1) = obj.inter(end) + ((obj.max - obj.threshold) / 2);
+            else 
+                obj.inter(end + 1) = obj.inter(end) + stimulus;
             end
         end
         
         function setPotential(obj, potential)
-            obj.potential = potential;
-        end
-        
-        function setNext(obj, next)
-            obj.next = next;
-        end
-        
-        function decayPotential(obj)
-            obj.potential = obj.potential - obj.decay;
+            obj.inter = potential;
         end
     end
 end

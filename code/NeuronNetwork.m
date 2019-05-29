@@ -3,27 +3,25 @@ clear all; close all;
 %% Setup
 
 resting = -65;
-network = cell(1, 10);
+network = cell(1, 2);
 
 for i = 1:size(network, 2)
     network{i} = neuron;
     network{i}.name = i;
 end
 
-adjMatrix = zeros(10, 10);
+adjMatrix = zeros(size(network, 1), size(network, 2));
 
 adjMatrix(1, 2) = 1;
-adjMatrix(1, 3) = 0.5;
-adjMatrix(1, 4) = 0.25;
-adjMatrix(2, 5) = 1;
+adjMatrix(2, 1) = 0.5;
 
 %% Input
 
-stim = zeros(1, 10);
+stim = zeros(size(network, 1), size(network, 2));
 stim(1) = 20;
 
-outputs = zeros(1, 10);
-spikes = zeros(1, 10);
+outputs = zeros(size(network, 1), size(network, 2));
+spikes = zeros(size(network, 1), size(network, 2));
 
 for i = 1:100
     for j = 1:size(network, 2)
@@ -44,7 +42,7 @@ end
 hold on
 
 for i = 1:size(network, 2)
-    plot(0:100, network{i}.potential)
+    plot(0:100, network{i}.inter)
 end
 
 labels = {};
