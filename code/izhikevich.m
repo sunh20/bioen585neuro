@@ -1,3 +1,5 @@
+% hi all you have to do is run this
+
 function[]=izhikevich(varargin)
 if nargin > 0 
 	eval(varargin{1}); %execute the argument 
