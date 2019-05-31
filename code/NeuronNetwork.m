@@ -1,9 +1,12 @@
 clear all; close all;
 
+networkSize = 5;
+inhibFrac = .5;
+
 %% Setup
 
 resting = -65;
-network = cell(1, 2);
+network = cell(1, networkSize);
 
 for i = 1:size(network, 2)
     network{i} = neuron;
@@ -11,10 +14,7 @@ for i = 1:size(network, 2)
 end
 
 % future adj matrix function (genNetwork) will go here
-adjMatrix = zeros(size(network, 1), size(network, 2));
-
-adjMatrix(1, 2) = 1;
-adjMatrix(2, 1) = 0.5;
+adjMatrix = genNetwork(networkSize, 70);
 
 %% Input
 
@@ -54,6 +54,8 @@ end
 
 %% Sanity Plots
 
+figure()
+
 hold on
 
 for i = 1:size(network, 2)
@@ -61,10 +63,9 @@ for i = 1:size(network, 2)
 end
 
 labels = {};
+spikeLogs = [];
 for i = 1:size(network, 2)
     labels{i} = "Neuron " + i;
 end
 
 legend(labels)
-
-plot(t, I)

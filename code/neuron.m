@@ -9,6 +9,7 @@ classdef neuron < handle
         eqnParams;
         sens;
         inhib;
+        spiking;
     end
     
     methods
@@ -16,24 +17,28 @@ classdef neuron < handle
             obj.resting = -65;
             obj.intra = [obj.resting];
             obj.threshold = -40;
-            obj.output = 30;
+            obj.output = 40;
             obj.maxSpike = 30;
             obj.eqnParams = [0.04 5 140 0.02 0.2 obj.resting 8 30];
             obj.sens = [obj.eqnParams(7)];
             obj.inhib = false;
+            obj.spiking = 0;
         end
         
         function spike = addPotential(obj, stimulus, dt)
             spike = 0;
-            if obj.intra(end) >= obj.maxSpike
+            if obj.spiking > 0
+                spike = obj.output;
+                obj.spiking = obj.spiking + 1;
+                if obj.spiking > 500
+                    obj.spiking = 0;
+                end
+            end
+            if obj.intra(end) >= obj.maxSpike && obj.spiking == 0
                 obj.intra(end) = obj.maxSpike; % makes sure spikes don't exceed this
                 obj.intra(end+1) = obj.resting;
                 obj.sens(end+1) = obj.sens(end) + obj.eqnParams(8);
-                if obj.inhib
-                    spike = -obj.output;
-                else 
-                    spike = obj.output;
-                end
+                obj.spiking = 1;
             else 
                 obj.sens(end+1) = obj.sens(end) + dt * (obj.eqnParams(4)... 
                                   * (obj.eqnParams(5) * obj.intra(end)...
