@@ -1,12 +1,12 @@
 clear all; close all;
+%% Initial Inputs
 
-networkSize = 5;
-inhibFrac = .5;
+networkSize = 5; % Number of neurons
+inhibFrac = .3; % Fraction of neurons to be set as inhibitory
 
 %% Setup
 
-resting = -65;
-network = cell(1, networkSize);
+network = cell(1, networkSize); % Neuron array
 
 for i = 1:size(network, 2)
     network{i} = neuron;
@@ -18,9 +18,11 @@ adjMatrix = genNetwork(networkSize, 70);
 
 %% Input
 
+% Input stimulation to neurons
 stim = zeros(size(network, 1), size(network, 2));
 stim(1) = 20;
 
+% Nueron outputs (update with each time step)
 outputs = zeros(size(network, 1), size(network, 2));
 spikes = zeros(size(network, 1), size(network, 2));
 
@@ -39,12 +41,15 @@ I = zeros(length(t),1);
     I(8500:9000) = 40;  % +40 mV square pulse
 
 for i = 1:length(t) - 1
+    % Adds stimulation and output from previous step to network
     for j = 1:size(network, 2)
         spikes(j) = network{j}.addPotential(stim(j) + outputs(j), dt);
     end
     
+    % Resets outputs
     outputs = outputs * 0;
     
+    % Collects outputs from previous time step
     for m = 1:size(spikes, 2)
         for n = 1:size(adjMatrix, 1)
             outputs(n) = outputs(n) + spikes(m) * adjMatrix(m, n);
@@ -58,6 +63,7 @@ figure()
 
 hold on
 
+% Plots each neuron's intracellular potential log
 for i = 1:size(network, 2)
     plot(t, network{i}.intra)
 end
