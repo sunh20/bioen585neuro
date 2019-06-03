@@ -26,8 +26,8 @@ switch type
 
         EPSP = 1./(t.*sigma.*(sqrt(2.*pi))).*exp(-(log(t - mu).^2)./(2.*sigma.^2));
 
-        % Scale vector output to give whatever height wanted
-        scale_factor = 130; %defines max amplitude in MicroVolts
+        % Scale vector 10mV max
+        scale_factor = 10; %defines max amplitude in MicroVolts
         EPSP = EPSP*scale_factor; 
 
         % Generates IPSP pulse - 1/2 magnitude of EPSP and upside down
