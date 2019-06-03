@@ -24,19 +24,19 @@ t = 0:dt:100;           % time span (ms)
 
 % stimulation
 stim = zeros(length(t), networkSize);
-stim(:, 1) = 20; 
+stim(100:500, 1:2) = 40; 
 
 %% generate network
 [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDensity,inhibFrac,t,dt,stim);
 
 %% get spiking info
-
+[LFP, EC] = genLFP(spiking,t);
 
 %% some (sanity) plots
-figure;
+figure(1)
 hold on
 
-% Plots each neuron's intracellular potential log
+% Plots each neuron's intracellular potential
 labels = cell(networkSize,1);           % neuron labels
 neuron_type = zeros(networkSize,1);     % 1-excite, 0-inhib
 for i = 1:networkSize
@@ -48,7 +48,7 @@ end
 legend(labels)
 
 % Plots visual graph of network connections
-figure;
+figure(2)
 G = digraph(adjMatrix);
 G_plot = plot(G,'Layout','circle');
 G_plot.EdgeColor = zeros(1,3);
@@ -62,9 +62,45 @@ title('Network visual graph')
 axis off
 
 % plot heatmap showing connections
-figure;
+figure(3)
 h1 = heatmap(adjMatrix);
 h1.Colormap = jet;
 title('Network connectivity weights')
 ylabel('From Neuron')
 xlabel('To Neuron')
+
+% plots spiking and LFP
+figure(4)   % plots individual firing of all neurons
+
+figure(5)   % plots individual extracellular potentials
+
+figure(6)   % plots overall LFP
+
+for neu = 1:networkSize
+    firings = find(spiking(neu,:));
+    
+    figure(4)
+    plot(firings,neu+zeros(length(firings),1),'.'); hold on
+    xlim([0 length(t)])
+    ylim([0 networkSize])
+    
+    figure(5)
+    subplot(networkSize,1,neu)
+    plot(t,EC(neu,:))
+end
+
+figure(6)
+plot(t, LFP);
+title('LFP Summed behavior');
+xlabel('Time (ms)')
+
+figure(4)   % firings
+xlabel('time steps')
+ylabel('Neuron')
+
+figure(5)   % ecs
+xlabel('time (ms)')
+
+%% Some stats
+fprintf('Total number of spikes: %d\n',sum(sum(spiking)))
+

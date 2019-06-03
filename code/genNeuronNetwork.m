@@ -5,8 +5,8 @@ function [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDen
 network = cell(1, networkSize); % Neuron array
 
 for i = 1:size(network, 2)
-    if rand(1) < inhibFrac
-        network{i} = neuron(true);
+    if mod(i,ceil(1/inhibFrac)) == 0
+        network{i} = neuron(true);  % neuron is inhib
     else
         network{i} = neuron(false);
     end

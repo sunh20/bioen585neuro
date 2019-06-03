@@ -22,6 +22,7 @@ classdef neuron < handle
             obj.inhib = inhib; 
             obj.spiking = 0; 
             obj.spikeLog = [];
+            obj.output = 0;
             
             % 4 ms PSP, same dt as NeuronNetwork
             if obj.inhib
@@ -76,6 +77,11 @@ classdef neuron < handle
         function setPotential(obj, potential)
             % Sets the potential of the neuron to the provided value.
             obj.intra = potential;
+        end
+        
+        function setInhib(obj)
+            obj.inhib = true;
+            obj.output = genPSP(0.01:0.01:4,0,2);
         end
         
     end
