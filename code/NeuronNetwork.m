@@ -2,7 +2,7 @@ clear all; close all;
 %% Initial Inputs
 
 networkSize = 5; % Number of neurons
-inhibFrac = 1; % Fraction of neurons to be set as inhibitory
+inhibFrac = 0; % Fraction of neurons to be set as inhibitory
 
 %% Setup
 
@@ -16,6 +16,8 @@ for i = 1:size(network, 2)
     end
     network{i}.name = i;
 end
+
+network{1}.setInhib();
 
 % make network
 adjMatrix = genNetwork(networkSize, 70);
