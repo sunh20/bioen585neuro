@@ -6,7 +6,7 @@ function PSP = genPSP(t,sign,type)
 switch type
     case 1 % gaussian
         %Gaussian Distribution function: 
-        a = 3; % controls height of curve
+        a = 30; % controls height of curve
         b = 4; % controls location of center peak
         c = 1; % controls width of peak
 
@@ -27,7 +27,7 @@ switch type
         EPSP = 1./(t.*sigma.*(sqrt(2.*pi))).*exp(-(log(t - mu).^2)./(2.*sigma.^2));
 
         % Scale vector 10mV max
-        scale_factor = 10; %defines max amplitude in MicroVolts
+        scale_factor = 80; %defines max amplitude in MicroVolts
         EPSP = EPSP*scale_factor; 
 
         % Generates IPSP pulse - 1/2 magnitude of EPSP and upside down

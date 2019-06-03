@@ -16,13 +16,21 @@ classdef neuron < handle
         function obj = neuron()
             obj.resting = -65;
             obj.intra = [obj.resting]; 
-            obj.output = 30; 
             obj.maxSpike = 30; 
             obj.eqnParams = [0.04 5 140 0.02 0.2 obj.resting 8 30];
             obj.sens = [obj.eqnParams(7)];
             obj.inhib = false; 
             obj.spiking = 0; 
             obj.spikeLog = [];
+            
+            % 4 ms PSP, same dt as NeuronNetwork
+            if obj.inhib
+                fprintf('Neuron %d is inhibitory\n',obj.name)
+                obj.output = genPSP(0.01:0.01:4,0,2); 
+            else
+                obj.output = genPSP(0.01:0.01:4,1,2); 
+            end
+            
         end
         
         function spike = addPotential(obj, stimulus, dt)
@@ -34,12 +42,12 @@ classdef neuron < handle
             spike = 0; % Output of neuron. Modify this for output of neuron
             
             % Runs if neuron is currently spiking. Outputs post synaptic
-            % potential if neuron is spiking. If spiking has ran for over
-            % 500 time steps, stops spiking.
+            % potential if neuron is spiking - duration is length of the
+            % PSP/output array
             if obj.spiking > 0
-                spike = obj.output; 
+                spike = obj.output(obj.spiking);%(obj.spiking);
                 obj.spiking = obj.spiking + 1;
-                if obj.spiking > 500
+                if obj.spiking > length(obj.output)
                     obj.spiking = 0;
                 end
             end

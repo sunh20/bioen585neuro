@@ -20,9 +20,6 @@ adjMatrix = genNetwork(networkSize, 70);
 %% Input
 
 % Input stimulation to neurons 
-stim = zeros(size(network, 1), size(network, 2));
-stim(1) = 20; 
-
 % Neuron outputs (update with each time step)
 outputs = zeros(size(network, 1), size(network, 2));
 spikes = zeros(size(network, 1), size(network, 2));
@@ -31,10 +28,16 @@ spikes = zeros(size(network, 1), size(network, 2));
 dt = 0.01;
 t = 0:dt:100; % time span (units?)
 
+% Input stimulation to neurons 
+stim = zeros(size(t, 2), size(network, 2));
+stim(:, 1) = 20; 
+
+%% Run Simulation
+
 for i = 1:length(t) - 1
     % Adds stimulation and output from previous step to network
     for j = 1:size(network, 2)
-        spikes(j) = network{j}.addPotential(stim(j) + outputs(j), dt);
+        spikes(j) = network{j}.addPotential(stim(i, j) + outputs(j), dt);
     end
     
     % Resets outputs

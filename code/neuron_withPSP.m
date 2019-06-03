@@ -24,13 +24,12 @@ classdef neuron_withPSP < handle
             obj.spikeLog = [];
             
             % 4 ms PSP, same dt as NeuronNetwork
-%             if obj.inhib
-%                 fprintf('Neuron %d is inhibitory\n',obj.name)
-%                 obj.output = genPSP(0.01:0.01:4,0,2); 
-%             else
-%                 obj.output = genPSP(0.01:0.01:4,1,2); 
-%             end
-            obj.output = 30;
+            if obj.inhib
+                fprintf('Neuron %d is inhibitory\n',obj.name)
+                obj.output = genPSP(0.01:0.01:4,0,2); 
+            else
+                obj.output = genPSP(0.01:0.01:4,1,2); 
+            end
             
         end
         
