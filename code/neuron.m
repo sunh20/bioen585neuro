@@ -13,13 +13,13 @@ classdef neuron < handle
     end
     
     methods
-        function obj = neuron()
+        function obj = neuron(inhib)
             obj.resting = -65;
             obj.intra = [obj.resting]; 
             obj.maxSpike = 30; 
             obj.eqnParams = [0.04 5 140 0.02 0.2 obj.resting 8 30];
             obj.sens = [obj.eqnParams(7)];
-            obj.inhib = false; 
+            obj.inhib = inhib; 
             obj.spiking = 0; 
             obj.spikeLog = [];
             
@@ -45,7 +45,7 @@ classdef neuron < handle
             % potential if neuron is spiking - duration is length of the
             % PSP/output array
             if obj.spiking > 0
-                spike = obj.output(obj.spiking);%(obj.spiking);
+                spike = obj.output(obj.spiking);
                 obj.spiking = obj.spiking + 1;
                 if obj.spiking > length(obj.output)
                     obj.spiking = 0;

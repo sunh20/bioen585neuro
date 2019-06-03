@@ -2,16 +2,19 @@ clear all; close all;
 %% Initial Inputs
 
 networkSize = 5; % Number of neurons
-inhibFrac = .3; % Fraction of neurons to be set as inhibitory
+inhibFrac = 1; % Fraction of neurons to be set as inhibitory
 
 %% Setup
 
 network = cell(1, networkSize); % Neuron array
 
 for i = 1:size(network, 2)
-    network{i} = neuron;
+    if rand(1) < inhibFrac
+        network{i} = neuron(false);
+    else
+        network{i} = neuron(true);
+    end
     network{i}.name = i;
-    % TODO: set inhib neurons using inhibFrac
 end
 
 % make network
@@ -61,7 +64,7 @@ for i = 1:size(network, 2)
     plot(t, network{i}.intra)
 end
 
-labels = {};
+labels = cell(networkSize,1);
 spikeLogs = [];
 for i = 1:size(network, 2)
     labels{i} = "Neuron " + i;
