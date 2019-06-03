@@ -3,7 +3,7 @@
 % principles of neuron populations. We can modify parameters such as
 % network size, density...(keep working on this)
 
-function adj = genNetwork(size,density)
+function adj = genNetwork(network,size,density)
 % size = number of neurons in network
 % density = determines number of connections as a percent of 
 % total possible connections (5 = 5% total network is connected)
@@ -12,6 +12,12 @@ adj = zeros(size,size);
 % % random case
 % adj = rand(size,size);
 % adj = adj - diag(diag(adj));
+
+% ID excitatory and inhibitory neurons
+neuron_type = zeros(size,1);    % 1-excite, 0-inhib
+for i = 1:length(network)
+    neuron_type(i) = ~network{i}.inhib;
+end
 
 % add density information - determine number of connections and then
 % randomly generate indices to fill in with randomly generates weights
@@ -36,24 +42,20 @@ for i = 1:num_connections
     % assign random value [0,1]
     adj_flat(rand_index) = rand(1);
     
-    
 end
 
 % unflatten matrix
 adj = reshape(adj_flat,size,size);
 
-% plot graph
-figure;
-plot(digraph(adj),'Layout','circle')
-
-% plot heatmap showing connections
-figure;
-heatmap(adj);
+% make inhib connections negative
+adj(neuron_type == 0,:) = -adj(neuron_type == 0,:);
 
 % info (sanity check)
 clc
 fprintf('Generating a network of %d neurons and %d percent density\n',size,density)
 fprintf('Expected number of connections: %d\n', num_connections)
 fprintf('Number of connections: %d\n', length(find(adj)))
+fprintf('Excitatory neurons: %d, Inhibitory neurons: %d\n',...
+            length(find(neuron_type)),length(find(neuron_type-1)))
 
 end

@@ -10,7 +10,7 @@ numNeurons = 10;
 fire = randi([0 1], numNeurons, length(tspan));
 
 % call function
-[LFP, ec] = getLFP(fire,max_t);
+[LFP, ec] = genLFP(fire,tspan);
 
 % plot everything
 figure(1)   % firings
