@@ -9,7 +9,7 @@ inhibFrac = .3; % Fraction of neurons to be set as inhibitory
 network = cell(1, networkSize); % Neuron array
 
 for i = 1:size(network, 2)
-    network{i} = neuron_withPSP;
+    network{i} = neuron;
     network{i}.name = i;
     % TODO: set inhib neurons using inhibFrac
 end
@@ -19,9 +19,9 @@ adjMatrix = genNetwork(networkSize, 70);
 
 %% Input
 
-% Input stimulation to neurons (what does this do?)
+% Input stimulation to neurons 
 stim = zeros(size(network, 1), size(network, 2));
-stim(1) = 40; 
+stim(1) = 20; 
 
 % Neuron outputs (update with each time step)
 outputs = zeros(size(network, 1), size(network, 2));
@@ -65,3 +65,12 @@ for i = 1:size(network, 2)
 end
 
 legend(labels)
+
+%% format spikes
+
+spiking = zeros(networkSize,length(t)-1);
+for i = 1:networkSize
+    spiking(i,:) = network{i}.spikeLog;    
+end
+
+
