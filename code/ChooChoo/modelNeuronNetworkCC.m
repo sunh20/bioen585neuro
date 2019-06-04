@@ -14,7 +14,7 @@
 
 clear all; close all; clc
 %% specify parameters
-addpath(genpath('\\studentfile.student.bioeng.washington.edu\usr$\jch1n\Documents\GitHub\bioen585neuro\code\ChooChoo'))
+addpath(genpath('\\studentfile.student.bioeng.washington.edu\usr$\jch1n\Documents\GitHub\bioen585neuro\code'))
 
 networkSize = 10;       % # neurons in network
 inhibFrac = 0;        % fraction of inhib neurons
@@ -28,7 +28,7 @@ stim = zeros(length(t), networkSize);
 stim(1:1000,1) = 40; 
 
 netDensities = 0:10:100;
-trials = 100;
+trials = 200;
 
 spikes = zeros(length(netDensities), trials);
 devSpikes = zeros(length(netDensities), trials);
