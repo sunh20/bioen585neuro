@@ -56,10 +56,10 @@ classdef neuron < handle
             % Runs Izhikevich. Adds current intracellular potential to
             % neuron log. If neuron exceeds maxSpike, begins spiking and
             % signals start of post synaptic potential.
-            if obj.intra(end) >= obj.maxSpike && obj.spiking == 0
+            if obj.intra(end) >= obj.maxSpike 
                 obj.intra(end) = obj.maxSpike; % makes sure spikes don't exceed this
                 obj.intra(end+1) = obj.resting;
-                obj.sens(end+1) = obj.sens(end) + obj.eqnParams(8);
+                obj.sens(end+1) = obj.sens(end) + obj.eqnParams(7);
                 obj.spiking = 1;
                 obj.spikeLog(end + 1) = 1;
             else 

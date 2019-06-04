@@ -1,26 +1,78 @@
-function genFigures()
-% generates all figures for this project
-% does not rely on parameters so can run by section
+function genFigures(t,network,adjMatrix,spiking,LFP,EC)
 
-%% Figure 1: borrowed from Izhikevich 2003 paper
+disp('')
+networkSize = length(network);
 
-%% Figure 2: Simple IZ neuron with step input
+figure(1)
+hold on
 
-dt = 0.01;
-t = 0:dt:100; % time span (ms)
-I = zeros(length(t),1);
+% Plots each neuron's intracellular potential
+labels = cell(networkSize,1);           % neuron labels
+neuron_type = zeros(networkSize,1);     % 1-excite, 0-inhib
+for i = 1:networkSize
+    plot(t, network{i}.intra)
+    labels{i} = "Neuron " + i;
+    neuron_type(i) = ~network{i}.inhib;
+end
 
-% input
-I(1000:end) = 40;    % +40 mV square pulse
+legend(labels)
 
-simpleIZ(t,dt,I)
+% Plots visual graph of network connections
+figure(2)
+G = digraph(adjMatrix);
+G_plot = plot(G,'Layout','circle');
+G_plot.EdgeColor = zeros(1,3);
+G_plot.NodeColor = zeros(networkSize,3);
+G_plot.NodeColor(neuron_type==0,:) = repmat([0,0,1],...
+                [sum(neuron_type==0) 1]);   % label inhib neurons as blue
+G_plot.NodeColor(neuron_type==1,:) = repmat([1,0,0],...
+                [sum(neuron_type==1) 1]);   % label excite neurons as red
+G_plot.LineWidth = abs(G.Edges.Weight*5);        % line weights
+title('Network visual graph')
+axis off
 
-%% Figure 3: Averaged extracellular potential neuron
-load('neuron2.mat')
+% plot heatmap showing connections
+figure(3)
+h1 = heatmap(adjMatrix);
+h1.Colormap = jet;
+title('Network connectivity weights')
+ylabel('From Neuron')
+xlabel('To Neuron')
 
-plot(t*1e3, avg_NEURON)
+% plots spiking and LFP
+figure(4)   % plots individual firing of all neurons
+title('Individual neuron firing')
+
+figure(5)   % plots individual extracellular potentials
+title('Individual neuron extracellular potentials')
+
+figure(6)   % plots overall LFP
+title('LFP Summed behavior');
+
+for neu = 1:networkSize
+    firings = find(spiking(neu,:));
+    
+    figure(4)
+    plot(firings,neu+zeros(length(firings),1),'.'); hold on
+    xlim([0 length(t)])
+    ylim([0 networkSize])
+    
+    figure(5)
+    subplot(networkSize,1,neu)
+    plot(t,EC(neu,:))
+end
+
+figure(6)
+plot(t, LFP);
 xlabel('Time (ms)')
-ylabel('Potential (uV)')
-title('Extracellular Potential from Averaged Single-Unit Recordings')
+ylabel('Potential (mV)')
+
+figure(4)   % firings
+xlabel('time steps')
+ylabel('Neuron')
+
+figure(5)   % ecs
+xlabel('time (ms)')
+ylabel('Potential (mV)')
 
 end

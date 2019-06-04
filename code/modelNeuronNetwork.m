@@ -14,9 +14,9 @@
 
 clear all; close all; clc
 %% specify parameters
-networkSize = 10;       % # neurons in network
+networkSize = 1;       % # neurons in network
 networkDensity = 70;    % range 0-100
-inhibFrac = 0.5;        % fraction of inhib neurons
+inhibFrac = 0;        % fraction of inhib neurons
 
 % time
 dt = 0.01;              % time step - don't change this (yet)
@@ -24,7 +24,7 @@ t = 0:dt:100;           % time span (ms)
 
 % stimulation
 stim = zeros(length(t), networkSize);
-stim(100:500, 1:2) = 40; 
+stim(5000:end,1:5) = 40; 
 
 %% generate network
 [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDensity,inhibFrac,t,dt,stim);
@@ -33,74 +33,9 @@ stim(100:500, 1:2) = 40;
 [LFP, EC] = genLFP(spiking,t);
 
 %% some (sanity) plots
-figure(1)
-hold on
-
-% Plots each neuron's intracellular potential
-labels = cell(networkSize,1);           % neuron labels
-neuron_type = zeros(networkSize,1);     % 1-excite, 0-inhib
-for i = 1:networkSize
-    plot(t, network{i}.intra)
-    labels{i} = "Neuron " + i;
-    neuron_type(i) = ~network{i}.inhib;
-end
-
-legend(labels)
-
-% Plots visual graph of network connections
-figure(2)
-G = digraph(adjMatrix);
-G_plot = plot(G,'Layout','circle');
-G_plot.EdgeColor = zeros(1,3);
-G_plot.NodeColor = zeros(networkSize,3);
-G_plot.NodeColor(neuron_type==0,:) = repmat([0,0,1],...
-                [sum(neuron_type==0) 1]);   % label inhib neurons as blue
-G_plot.NodeColor(neuron_type==1,:) = repmat([1,0,0],...
-                [sum(neuron_type==1) 1]);   % label excite neurons as red
-G_plot.LineWidth = abs(G.Edges.Weight*5);        % line weights
-title('Network visual graph')
-axis off
-
-% plot heatmap showing connections
-figure(3)
-h1 = heatmap(adjMatrix);
-h1.Colormap = jet;
-title('Network connectivity weights')
-ylabel('From Neuron')
-xlabel('To Neuron')
-
-% plots spiking and LFP
-figure(4)   % plots individual firing of all neurons
-
-figure(5)   % plots individual extracellular potentials
-
-figure(6)   % plots overall LFP
-
-for neu = 1:networkSize
-    firings = find(spiking(neu,:));
-    
-    figure(4)
-    plot(firings,neu+zeros(length(firings),1),'.'); hold on
-    xlim([0 length(t)])
-    ylim([0 networkSize])
-    
-    figure(5)
-    subplot(networkSize,1,neu)
-    plot(t,EC(neu,:))
-end
-
-figure(6)
-plot(t, LFP);
-title('LFP Summed behavior');
-xlabel('Time (ms)')
-
-figure(4)   % firings
-xlabel('time steps')
-ylabel('Neuron')
-
-figure(5)   % ecs
-xlabel('time (ms)')
+genFigures(t,network,adjMatrix,spiking,LFP,EC);
 
 %% Some stats
+fprintf('Model run for %d to %d ms\n',t(1),t(end))
 fprintf('Total number of spikes: %d\n',sum(sum(spiking)))
 

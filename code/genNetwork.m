@@ -39,8 +39,8 @@ for i = 1:num_connections
     end
     idx(i) = rand_index;
     
-    % assign random value [0,1]
-    adj_flat(rand_index) = rand(1);
+    % assign random value [0.5,1]
+    adj_flat(rand_index) = 0.5 + 0.5.*rand(1);
     
 end
 
