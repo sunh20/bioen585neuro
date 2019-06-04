@@ -3,7 +3,7 @@
 % Kelsey Luu
 % Grace Jun
 % Meriam Lahrichi
-% Jackson theChooChooChin
+% Jackson "ChooChoo" Chin
 % BIOEN 485/585 final project
 % June 2019
 %
@@ -30,7 +30,7 @@ stim(5000:end,1:5) = 40;
 [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDensity,inhibFrac,t,dt,stim);
 
 %% get spiking info
-[LFP, EC] = genLFP(spiking,t);
+[LFP, EC] = getLFP(spiking,t);
 
 %% some (sanity) plots
 genFigures(t,network,adjMatrix,spiking,LFP,EC);
