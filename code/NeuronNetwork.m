@@ -2,35 +2,20 @@ clear all; close all;
 %% Initial Inputs
 
 networkSize = 5; % Number of neurons
-<<<<<<< HEAD
-inhibFrac = 0; % Fraction of neurons to be set as inhibitory
-=======
-inhibFrac = 0.5; % Fraction of neurons to be set as inhibitory
->>>>>>> modular
+inhibFrac = .3; % Fraction of neurons to be set as inhibitory
 
 %% Setup
 
 network = cell(1, networkSize); % Neuron array
 
 for i = 1:size(network, 2)
-%     if rand(1) < inhibFrac
-%         network{i} = neuron(true);
-%     else
-%         network{i} = neuron(false);
-%     end
-    if mod(i,ceil(1/inhibFrac)) == 0
-        network{i} = neuron(false);
-    else
-        network{i} = neuron(true);
-    end
+    network{i} = neuron;
     network{i}.name = i;
-    
+    % TODO: set inhib neurons using inhibFrac
 end
 
-network{1}.setInhib();
-
 % make network
-adjMatrix = genNetwork(network,networkSize, 70);
+adjMatrix = genNetwork(networkSize, 70);
 
 %% Input
 
@@ -61,7 +46,7 @@ for i = 1:length(t) - 1
     % Collects outputs from previous time step
     for m = 1:size(spikes, 2)
         for n = 1:size(adjMatrix, 1)
-            outputs(n) = outputs(n) + spikes(m) * abs(adjMatrix(m, n));
+            outputs(n) = outputs(n) + spikes(m) * adjMatrix(m, n);
         end
     end
 end
@@ -76,7 +61,7 @@ for i = 1:size(network, 2)
     plot(t, network{i}.intra)
 end
 
-labels = cell(networkSize,1);
+labels = {};
 spikeLogs = [];
 for i = 1:size(network, 2)
     labels{i} = "Neuron " + i;

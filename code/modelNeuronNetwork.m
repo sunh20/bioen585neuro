@@ -38,4 +38,3 @@ genFigures(t,network,adjMatrix,spiking,LFP,EC);
 %% Some stats
 fprintf('Model run for %d to %d ms\n',t(1),t(end))
 fprintf('Total number of spikes: %d\n',sum(sum(spiking)))
-
