@@ -78,18 +78,10 @@ classdef neuron < handle
             % Sets the potential of the neuron to the provided value.
             obj.intra = potential;
         end
-
-<<<<<<< HEAD
-	function setInhib(obj)
-	    obj.inhib = true;
-	    obj.output = genPSP(0.01:0.01:4,0,2);
-	end
-=======
+        
         function setInhib(obj)
             obj.inhib = true;
             obj.output = genPSP(0.01:0.01:4,0,2);
         end
-
->>>>>>> modular
     end
 end
