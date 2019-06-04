@@ -1,6 +1,6 @@
 function genFigures(t,network,adjMatrix,spiking,LFP,EC)
 
-disp('')
+disp('Generating figures...')
 networkSize = length(network);
 
 figure(1)

@@ -51,7 +51,6 @@ adj = reshape(adj_flat,size,size);
 adj(neuron_type == 0,:) = -adj(neuron_type == 0,:);
 
 % info (sanity check)
-clc
 fprintf('Generating a network of %d neurons and %d percent density\n',size,density)
 fprintf('Expected number of connections: %d\n', num_connections)
 fprintf('Number of connections: %d\n', length(find(adj)))

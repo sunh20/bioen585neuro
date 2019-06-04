@@ -13,22 +13,24 @@ classdef neuron < handle
     end
 
     methods
-        function obj = neuron(inhib)
+        function obj = neuron(name,inhib)
             obj.resting = -65;
             obj.intra = [obj.resting];
+            obj.output = 0;
             obj.maxSpike = 30;
             obj.eqnParams = [0.04 5 140 0.02 0.2 obj.resting 8 30];
             obj.sens = [obj.eqnParams(7)];
             obj.inhib = inhib;
             obj.spiking = 0;
+            obj.name = name;
             obj.spikeLog = [];
-	          obj.output = 0;
 
             % 4 ms PSP, same dt as NeuronNetwork
             if obj.inhib
-                 fprintf('Neuron %d is inhibitory\n',obj.name)
+                fprintf('Neuron %d is inhibitory\n',obj.name)
                 obj.output = genPSP(0.01:0.01:4,0,2);
             else
+                fprintf('Neuron %d is excitatory\n',obj.name)
                 obj.output = genPSP(0.01:0.01:4,1,2);
             end
 
