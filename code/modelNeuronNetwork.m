@@ -13,9 +13,18 @@
 % extracellular), and overall network behavior (local-field potential)
 
 clear all; close all; clc
+%% THINGS TO CHANGE
+% save data - TRUE = WILL SAVE
+% format: data_(year,month,day,hour,minute,second)
+% example: data_20196415754
+save_data = true;
+
+% True - will plot all figures
+plotOn = true;
+
 %% specify parameters
 networkSize = 10;       % # neurons in network
-networkDensity = 70;    % range 0-100
+networkDensity = 10;    % range 0-100
 inhibFrac = 0;        % fraction of inhib neurons
 
 % time
@@ -39,4 +48,13 @@ fprintf('Model run for %d to %d ms\n',t(1),t(end))
 fprintf('Total number of spikes: %d\n',sum(sum(spiking)))
 
 %% some (sanity) plots
-genFigures(t,network,adjMatrix,spiking,LFP,EC);
+if plotOn
+    genFigures(t,network,adjMatrix,spiking,LFP,EC);
+end
+
+%% save data
+if save_data
+    cl = clock;
+    strname = sprintf('data/data_%d%d%d%d%d%d.mat',cl(1),cl(2),cl(3),cl(4),cl(5),fix(cl(6)));
+    save(strname,'network','adjMatrix','spiking','t','dt','LFP','EC')
+end
