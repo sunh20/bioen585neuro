@@ -34,7 +34,16 @@ axis off
 % plot heatmap showing connections
 figure(3)
 h1 = heatmap(adjMatrix);
-h1.Colormap = jet;
+
+if sum(neuron_type==0) == 0     % there are only excitatory (white to red)
+	colorMap = [ones(256,1),linspace(1,0,256)',linspace(1,0,256)'];
+elseif sum(neuron_type==1) == 0 % there are only inhibitory (blue to white)
+    colorMap = [linspace(0,1,256)',linspace(0,1,256)',ones(256,1)];
+else                            % has both, blue to white to red
+    colorMap = [[linspace(0,1,128),ones(1,128)]',[linspace(0,1,128),linspace(1,0,128)]',[ones(1,128),linspace(1,0,128)]'];
+end
+
+h1.Colormap = colorMap;
 title('Network connectivity weights')
 ylabel('From Neuron')
 xlabel('To Neuron')
@@ -63,7 +72,13 @@ for neu = 1:networkSize
 end
 
 figure(6)
+% LFP envelope - root mean squared
+[up,~] = envelope(LFP,300,'rms');
+
 plot(t, LFP);
+hold on
+plot(t,up-up(1));
+legend('Raw sum','RMS Envelope')
 xlabel('Time (ms)')
 ylabel('Potential (mV)')
 

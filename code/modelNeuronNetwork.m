@@ -14,7 +14,7 @@
 
 clear all; close all; clc
 %% specify parameters
-networkSize = 2;       % # neurons in network
+networkSize = 10;       % # neurons in network
 networkDensity = 70;    % range 0-100
 inhibFrac = 0;        % fraction of inhib neurons
 
@@ -30,13 +30,13 @@ stim(5000:end,1) = 40;
 tic
 [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDensity,inhibFrac,t,dt,stim);
 fprintf('Model run time: %.2f seconds\n',toc)
+
 %% get spiking info
 [LFP, EC] = getLFP(spiking,t);
-
-%% some (sanity) plots
-
-genFigures(t,network,adjMatrix,spiking,LFP,EC);
 
 %% Some stats
 fprintf('Model run for %d to %d ms\n',t(1),t(end))
 fprintf('Total number of spikes: %d\n',sum(sum(spiking)))
+
+%% some (sanity) plots
+genFigures(t,network,adjMatrix,spiking,LFP,EC);
