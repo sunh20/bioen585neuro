@@ -14,9 +14,9 @@
 
 clear all; close all; clc
 %% specify parameters
-addpath(genpath('\\studentfile.student.bioeng.washington.edu\usr$\jch1n\Documents\GitHub\bioen585neuro\code'))
+addpath(genpath('C:\Users\Jackson\Documents\GitHub\bioen585neuro\code'))
 
-networkSize = 10;       % # neurons in network
+networkSize = 5;       % # neurons in network
 inhibFrac = 0;        % fraction of inhib neurons
 
 % time
@@ -38,6 +38,8 @@ zeroOuts = zeros(length(netDensities), trials);
 zeroIns = zeros(length(netDensities), trials);
 isolatedNeurons = zeros(length(netDensities), trials);
 spikeSpan = zeros(length(netDensities), trials);
+LFPs = zeros(length(netDensities), length(t));
+spikeLogs =  zeros(length(netDensities), length(t) - 1);
 
 for i = 1:1:length(netDensities)
     for j = 1:trials
@@ -66,17 +68,46 @@ for i = 1:1:length(netDensities)
         spikeInd = find(sum(spiking));
         spikeSpan(i, j) = spikeInd(end);
     end
+    LFPs(i,:) = LFP;
+    spikeLogs(i, :) = sum(spiking);
 end
 
-%%
+%% Average Activity Plot
 
-figure()
+figure(1)
 hold on
 
 plot(netDensities, mean(meanSpikes,2))
 errorbar(netDensities, mean(meanSpikes, 2), mean(devSpikes, 2))
+title("Average Neuron Activity vs. Network Density")
+xlabel("Network Density (%)")
+ylabel("Average Synapses per Neuron")
 
-%%
+
+%% Isolated Neuron Plot
+
+figure(2)
+hold on
+
+plot(netDensities, mean(isolatedNeurons, 2))
+errorbar(netDensities, mean(isolatedNeurons, 2), std(isolatedNeurons, 0, 2))
+title("Isolated Neurons vs. Network Density")
+xlabel("Network Density (%)")
+ylabel("Isolated Neurons in Network")
+
+%% Synapse Elapses
+
+figure(3)
+hold on
+
+plot(netDensities, mean(spikeSpan, 2) / 100)
+errorbar(netDensities, mean(spikeSpan, 2) / 100, std(spikeSpan, 0, 2) / 100)
+title("Span of Synapses vs. Network Density")
+xlabel("Network Density (%)")
+ylabel("Time Between First and Last Synapses (ms)")
+
+%% Functions
+
 function iso = checkIsolated(adjMatrix)
     iso = 0;
     
