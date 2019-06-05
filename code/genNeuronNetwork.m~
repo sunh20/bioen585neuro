@@ -4,8 +4,6 @@ function [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDen
 
 network = cell(1, networkSize); % Neuron array
 
-% network generation method #1 (Jackson):
-
 % for i = 1:size(network, 2)
 %     if mod(i,ceil(1/inhibFrac)) == 0
 %         network{i} = neuron(i,true);  % neuron is inhib
@@ -15,22 +13,17 @@ network = cell(1, networkSize); % Neuron array
 % end
 
 
-
-% network generation method #2 (Kelsey):
-
 for i = 1:size(network, 2)
-    network{i} = neuron(i, false);  % create all excitatory network  
+    network{i} = neuron(i, false);
 end
 
 
 inhibCount = 0;
 while inhibCount < (networkSize * inhibFrac)
-    for i = randi(networkSize, 1, 1)    % randomly select neuron 
-        if network{i}.inhib == false    % if neuron is excitatory
-            network{i} = neuron(i, true);   % make neuron inhibitory
-            inhibCount = inhibCount + 1;
-        end
-    end
+     if  
+        network{i} = neuron(i, false);
+        inhibCount = inhibCount + 1;
+     end
 end
 
 
