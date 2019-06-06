@@ -21,6 +21,9 @@ if first_run
             end
         end
     end
+    
+    adjMatrix = genNetwork(network, networkSize, networkDensity);
+
 else
     % load previous network
     load('adj_sim.mat')
@@ -30,10 +33,10 @@ else
         network{i} = neuron(i, network{i}.inhib);   % copy only inhib data
     end
     
+    % slightly randomize adj matrix weights
+    adjMatrix(adjMatrix ~=0) = adjMatrix(adjMatrix ~=0) + (rand(1)-0.5)*0.5;
+    
 end
-
-adjMatrix = genNetwork(network, networkSize, networkDensity);
-
 
 %% Input
 

@@ -55,7 +55,7 @@ if first_run
         avg_spiking_sim(i) = mean(sum(spiking,2));
 
         if first_run
-            save('adj_sim.mat','network')
+            save('adj_sim.mat','adjMatrix','network')
             first_run = false;
         end
     end

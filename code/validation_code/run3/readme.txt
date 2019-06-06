@@ -1,0 +1,1 @@
+kepy inhib/excite neurons the same, changed weights, saw same thing as run 1
