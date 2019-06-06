@@ -1,0 +1,1 @@
+shows good results but realized that when generating the simulation network, i used the same adjacency matrix but didn't fix which neurons were excitatory/inhib. This probably accounts for some of the variance we see in the results
