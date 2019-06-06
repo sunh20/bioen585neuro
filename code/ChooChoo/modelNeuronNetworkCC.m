@@ -15,13 +15,14 @@
 clear all; close all; clc
 %% specify parameters
 addpath(genpath('C:\Users\Jackson\Documents\GitHub\bioen585neuro\code'))
+addpath(genpath('\\studentfile.student.bioeng.washington.edu\usr$\jch1n\Documents\GitHub\bioen585neuro\code'))
 
-networkSize = 5;       % # neurons in network
+networkSize = 50;       % # neurons in network
 inhibFrac = 0;        % fraction of inhib neurons
 
 % time
-dt = 0.01;              % time step - don't change this (yet)
-t = 0:dt:100;           % time span (ms)
+dt = 0.1;              % time step - don't change this (yet)
+t = 0:dt:1000;           % time span (ms)
 
 % stimulation
 stim = zeros(length(t), networkSize);
@@ -41,6 +42,7 @@ spikeSpan = zeros(length(netDensities), trials);
 LFPs = zeros(length(netDensities), length(t));
 spikeLogs =  zeros(length(netDensities), length(t) - 1);
 
+tic
 for i = 1:1:length(netDensities)
     for j = 1:trials
         %% generate network
@@ -72,6 +74,8 @@ for i = 1:1:length(netDensities)
     spikeLogs(i, :) = sum(spiking);
 end
 
+solTime = toc
+disp("Solution Time: " + solTime)
 %% Average Activity Plot
 
 figure(1)
@@ -100,11 +104,13 @@ ylabel("Isolated Neurons in Network")
 figure(3)
 hold on
 
-plot(netDensities, mean(spikeSpan, 2) / 100)
-errorbar(netDensities, mean(spikeSpan, 2) / 100, std(spikeSpan, 0, 2) / 100)
+plot(netDensities, mean(spikeSpan, 2) * dt)
+errorbar(netDensities, mean(spikeSpan, 2) * dt, std(spikeSpan, 0, 2) * dt)
 title("Span of Synapses vs. Network Density")
 xlabel("Network Density (%)")
 ylabel("Time Between First and Last Synapses (ms)")
+
+save('FiftyNeuronRunLong');
 
 %% Functions
 
