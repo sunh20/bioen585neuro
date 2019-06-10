@@ -53,18 +53,11 @@ end
 % plot time repsonse vs. input
 figure;
 
-ax1 = subplot(2,1,1);
-plot(t,v)
+plot(t,v,t,I)
 title('Voltage time response of Izhikevich simple model')
 xlabel('Time (ms)')
 ylabel('Voltage (mV)')
-
-ax2 = subplot(2,1,2);
-plot(t,I)
-title('Input function')
-xlabel('Time (ms)')
-ylabel('Voltage (mV)')
-
-linkaxes([ax1 ax2],'xy')
+legend('Neuron potential','Stimulation input')
+ylim([-100 100])
 
 end
