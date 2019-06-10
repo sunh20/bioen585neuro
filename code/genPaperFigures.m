@@ -5,7 +5,7 @@ function genPaperFigures()
 %% Figure 1: borrowed from Izhikevich 2003 paper
 
 %% Figure 2: Simple IZ neuron with step input
-
+clearvars
 dt = 0.01;
 t = 0:dt:100; % time span (ms)
 I = zeros(length(t),1);
@@ -14,8 +14,9 @@ I = zeros(length(t),1);
 I(1000:end) = 40;    % +40 mV square pulse
 
 simpleIZ(t,dt,I)
-
+pause
 %% Figure 1A: Averaged extracellular potential neuron
+clearvars
 load('neuron2.mat')
 
 figure;
@@ -25,6 +26,7 @@ ylabel('Potential (uV)')
 title('Extracellular Potential from Averaged Single-Unit Recordings')
 
 %% Figure 2A: EPSP + IPSP
+clearvars
 t =  0:0.01:4;
 EPSP = genPSP(t,1,2);
 IPSP = genPSP(t,0,2);
@@ -35,9 +37,47 @@ title('EPSP & IPSP')
 xlabel('Time (ms)')
 ylabel('Potential (mV)')
 legend('EPSP', 'IPSP')
+pause
+
+%% Figure 3: Intra + extracellular signal
+clearvars
+
+networkSize = 1;       % # neurons in network
+networkDensity = 0;    % range 0-100
+inhibFrac = 0;        % fraction of inhib neurons
+
+% time
+dt = 0.01;              % time step - don't change this (yet)
+t = 0:dt:50;           % time span (ms)
+
+% stimulation
+stim = zeros(length(t), networkSize);
+stim(1000:2000,1) = 40; 
+
+[network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDensity,inhibFrac,t,dt,stim);
+[LFP, EC] = getLFP(spiking,t);
+
+% plot intra + extracellular potential
+figure;
+
+subplot(2,1,1) % stim
+plot(t,stim)
+xlabel('Time (ms)')
+ylabel('Voltage (mV)')
+title('Stim Input')
+ylim([-10 50])
+
+subplot(2,1,2) % intra
+plot(t, network{1}.intra,t,EC)
+xlabel('Time (ms)')
+ylabel('Voltage (mV)')
+title('Neuron Voltage Response')
+legend('Intra','Extra')
+
+pause
 
 %% Figure 3: 2 neuron network
-
+clearvars
 networkSize1 = 2;        % # neurons in network
 
 % time
@@ -88,7 +128,7 @@ xlabel('Time (ms)')
 ylabel('Voltage (mV)')
 title('Stimulation per Neuron')
 legend(labels)
-
+pause
 %% Figure 4: Network graph of 10 neuron network
 clearvars
 networkSize1 = 10;
@@ -144,7 +184,7 @@ for i = 1:4
     xlabel('To Neuron')
     title(strT(i))
 end
-
+pause
 %% Figure 5: LFP RMS envelope
 clearvars
 
@@ -175,6 +215,6 @@ xlabel('Time (ms)')
 ylabel('Potential (mV)')
 title('Average network activity - "LFP"')
 
-
+pause
 
 end 
