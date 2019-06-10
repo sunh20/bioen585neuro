@@ -17,11 +17,11 @@ clear all; close all; clc
 addpath(genpath('C:\Users\Jackson\Documents\GitHub\bioen585neuro\code'))
 addpath(genpath('\\studentfile.student.bioeng.washington.edu\usr$\jch1n\Documents\GitHub\bioen585neuro\code'))
 
-networkSize = 50;       % # neurons in network
+networkSize = 5;       % # neurons in network
 inhibFrac = 0;        % fraction of inhib neurons
 
 % time
-dt = 0.1;              % time step - don't change this (yet)
+dt = 0.01;              % time step - don't change this (yet)
 t = 0:dt:1000;           % time span (ms)
 
 % stimulation
