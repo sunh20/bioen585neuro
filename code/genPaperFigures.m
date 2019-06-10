@@ -154,11 +154,11 @@ inhibFrac = 0;        % fraction of inhib neurons
 
 % time
 dt = 0.01;              % time step - don't change this (yet)
-t = 0:dt:100;           % time span (ms)
+t = 0:dt:50;           % time span (ms)
 
 % stimulation
 stim = zeros(length(t), networkSize);
-stim(5000:end,1:2) = 40; 
+stim(1000:6000,1:2) = 40; 
 
 [network, adjMatrix, spiking] = genNeuronNetwork(networkSize,networkDensity,inhibFrac,t,dt,stim);
 [LFP, ~] = getLFP(spiking,t);
@@ -169,11 +169,11 @@ stim(5000:end,1:2) = 40;
 figure;
 plot(t, LFP);
 hold on
-plot(t,up-up(1));
+plot(t,up-up(1),'LineWidth',5);
 legend('Raw sum','RMS Envelope')
 xlabel('Time (ms)')
 ylabel('Potential (mV)')
-
+title('Average network activity - "LFP"')
 
 
 
