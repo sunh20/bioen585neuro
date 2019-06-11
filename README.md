@@ -52,3 +52,5 @@ https://www.sciencedirect.com/science/article/pii/S0896627312007039?via%3Dihub
 **Additional**
 
 ![expanding contributions](https://github.com/sunh20/bioen585neuro/blob/master/figures/expanding_brain_s.png)
+![theChooChooBrain](https://github.com/sunh20/bioen585neuro/blob/master/figures/choochoo.png)
+![team memeber names](https://github.com/sunh20/bioen585neuro/blob/master/figures/names.png)
