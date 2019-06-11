@@ -2,9 +2,7 @@
 
 ### BIOEN 485/585 Final	Project: Neuro group
 ###### Spring 2019
-**Title**: Simulating stimulation-induced network plasticity in ‘rich clubs’ by measuring changes in local-field potentials from modeled single-unit simple neurons 
-
-**Shorter title**: Modeling network plasticity from single-unit simple neurons
+**Title**: Interrogating dynamics of biological neural networks of modeled single-unit simple neurons 
 
 **Group members**:  
 - Samantha Sun - 1st year PhD student (sunh20@uw.edu)
@@ -13,26 +11,24 @@
 - Meriam Lahrichi - 3rd year undergraduate student (meriaml@uw.edu)
 - Jackson Chin - 4th year undergraduate student (jch1n@uw.edu)
 
-
 **Consultants**:  
 - Jonathan Mischler – 2nd year graduate student in Fetz lab (jmishler@uw.edu)
 - Larry Shupe – Senior Researcher in Fetz lab (lshupe@uw.edt) 
+- Dr. Eberhard Fetz - UW Faculty
 
 **Importance**: With advances in neural recording technologies, it is now possible to simultaneously perform single-site recordings and local field potential (LFP) recordings. However, there are still questions regarding the relationship between individual neuron spiking and the overall LFP shape and whether we can learn about the behavior of the network of neurons from the LFP it generates. 
 
-Of particular interest to this proposal is whether we can model stimulation-induced plasticity between networks of single-unit neurons, which will allow us to predict how neural networks may change with different stimulation inputs and inform future stimulation methods to modulate network plasticity in the brain. 
-
-**Previous knowledge**: There are many computational models of neurons that exist, most notably the Hodgkin-Huxley model that relates a neuron to an electrical circuit. Other models range from simple integrate-and-fire to complex neural network models. Each model has its benefits and drawbacks, and it’s important to consider what question is trying to be answered when deciding which model to use. Since this project involves scaling up to model a network of neurons, we decided on a simple neuron model developed by Izhikevich, which is an ODE model that is able to mimic the behavior of the 20 most fundamental electrical waveforms of neurons[1]. When considering how neural connections change with plasticity, the prominent theory is spike-timing dependent plasticity (STDP), which states that if one neuron fires just before another neuron repeatedly, then the strength of their connection increases. Research that explores how external stimulation changes plasticity has validated STDP, and our goal in this project is to computationally model stimulation to determine whether the network change matches STDP rules. 
+**Previous knowledge**: There are many computational models of neurons that exist, most notably the Hodgkin-Huxley model that relates a neuron to an electrical circuit. Other models range from simple integrate-and-fire to complex neural network models. Each model has its benefits and drawbacks, and it’s important to consider what question is trying to be answered when deciding which model to use. Since this project involves scaling up to model a network of neurons, we decided on a simple neuron model developed by Izhikevich, which is an ODE model that is able to mimic the behavior of the 20 most fundamental electrical waveforms of neurons[1].
 
 **Questions to be addressed**: Can we modify the simple neuron model to accurately replicate physiological data? How do single neurons contribute to the overall network LFP? How does external stimulation change the behavior between two networks of neurons?
 
 **Modeling approach**: The plan is to take the simple neuron model developed by Izhikevich to create two classes of neurons: tonic and bursting phasic. I chose these two because I have previously collected neural recording from a cockroach leg that exhibited behaviors that can be explained with these two neuron types. 
 
-The *first aim* of this project would be to implement this simple neuron model and create a small group of neurons (not connected) that matches the behavior I recorded. This will allow us to find out the physiologically relevant parameters and time scales we should be using.
+The *first aim* of this project would be to implement this simple neuron model and determine both the intracellular and extracellular behavior. The intracellular potential is inherent to the individual neuron, while the extracellular potential contributes to the overall extracellular field, which is typically what is being recorded when making neural recordings. 
 
-The *second aim* of the project is to scale up to a network-level so that we could measure a “local field potential (LFP)” or simply a signal that represents the summed activity of all the neurons in the network. LFPs are very commonly used to record neural activity and there are a lot of data that exists on what LFPs should look like. The main aspect in this aim is figure out how to connect the neurons and how many neurons to use. To determine how the network is connected, we will reference literature to see how the brain is typically connected. Previous research using network modeling has identified the brain having “small-world” properties, where there are densely connected groups or “rich clubs” of neurons that are sparsely connected to other densely connected groups[2]. We can optionally determine how much spontaneous firing (stochastic modeling) affects the overall network behavior. For this aim, we will ensure that our network is densely connected along with other network properties that we find in literature. We will validate this by comparing our modeled LFPs to experimentally recorded LFPs from literature. 
+The *second aim* of this project is to model the connections between neurons. From biology, we know that neurons interact through a signal cascade that eventually results in a change of post-synaptic potential, either excitatory (EPSP) or inhibitory (IPSP). When one neuron fires, it sends an EPSP or IPSP to receiving neurons, which changes the intracellular membrane potential of these neurons and either increases or decreases the likelihood of firing. This behavior needs to be reflected and confirmed through our model. 
 
-The *third aim* of this project (if there is time) would be to see how the network changes when introducing stimulation. For this, we will create two “rich clubs” of neurons and introduce a Dirac function that acts as external stimulation. We will explore what types of stimulation protocols to use, including common ones such as repetitive single-site stimulation and paired pulse stimulation. We will measure the LFPs and how they change before and after stimulation. We expect our model to follow STDP plasticity rules as explained in literature.
+The *third aim* of this project is to scale up to a network-level so that we could measure a “local field potential (LFP)” or simply a signal that represents the summed activity of all the neurons in the network. LFPs are commonly used to record neural activity, but it is unclear how individual neurons contribute to this signal. We model a population or netowrk of neurons by creating a graph theory framework. Graph theory networks are comprised of nodes and edges, which are analogous to neuron cell bodies and axons, and the directionality and weight of the edges can also be set. Graph theory has been widely used to represent brain connectivity, and previous work has identified specific network properties in the human brain related to its structure and organization [2]. For example, the human brain exhibits “small-world” properties, which is a result of having densely connected smaller networks that are sparsely connected to other dense networks. These properties helped direct how we designed our neuronal networks, where we primarily focused on modeling these densely connected smaller networks. After creating the initial network, here we measured the overall network behavior, the modeled LFP, given an external stimulus input.  We explored how the LFP behavior changed when altering network or external properties, such as network size, network density, and stimulus input. Our model provided a bottom-up approach to learn how different properties may affect the network behavior, as represented by the LFP, and relate these findings back to its implications in the human brain
 
 **References**:
 1. 	Izhikevich EM. Simple model of spiking neurons. IEEE Trans Neural Networks. 2003;14(6):1569-1572. doi:10.1109/TNN.2003.820440
