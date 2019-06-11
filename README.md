@@ -48,3 +48,6 @@ https://www.sciencedirect.com/science/article/pii/S0896627312007039?via%3Dihub
 3. https://www.researchgate.net/publication/317579637_Spiking_Neuron_Models_A_Review  
 
    Paper on different neuron models. Mostly for reference, don’t actually read it unless you’re really interested because it’s super dense and I won’t read it lol.
+
+**Additional**
+[[https://github.com/sunh20/bioen585neuro/master/figures/expanding_brain.png|alt=expanding_contributions]]
