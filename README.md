@@ -50,4 +50,5 @@ https://www.sciencedirect.com/science/article/pii/S0896627312007039?via%3Dihub
    Paper on different neuron models. Mostly for reference, don’t actually read it unless you’re really interested because it’s super dense and I won’t read it lol.
 
 **Additional**
+
 ![expanding contributions](https://github.com/sunh20/bioen585neuro/blob/master/figures/expanding_brain.png)
